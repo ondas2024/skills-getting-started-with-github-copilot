@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const activities = await response.json();
 
       // Clear loading message
+      const selectedActivity = activitySelect.value;
       activitiesList.innerHTML = "";
       activitySelect.length = 1;
 
@@ -116,6 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = name;
         activitySelect.appendChild(option);
       });
+
+      if (Object.prototype.hasOwnProperty.call(activities, selectedActivity)) {
+        activitySelect.value = selectedActivity;
+      }
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);
